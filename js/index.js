@@ -1,7 +1,5 @@
 
-
 const checkLoto = () => {
-
 
   let resultDiv = document.querySelector(".result");
  
@@ -38,7 +36,7 @@ const checkLoto = () => {
     return false;
   }
 
-
+ //Ma fonction de validation des mails renvoie une erreur dans un tableau. 
   if (customEmailTest(email).length > 0){
     resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">
     ${customEmailTest(email)}
@@ -52,9 +50,6 @@ const checkLoto = () => {
 const customEmailTest = (email) => {
   let messages = [];
   let extension = email.split('.').pop();
-  console.log(extension);
-  console.log(extension.length);
-
   if (email.length < 8){
     message = "Le mail fait moins de 8 caractère";
     messages.push(message);
@@ -71,7 +66,6 @@ const customEmailTest = (email) => {
     message = "L'extension ne fait pas 2 ou 3 caractere";
     messages.push(message);
   }
-
   return messages;
 }
 
@@ -90,7 +84,7 @@ const checkGame = (number, resultDiv) => {
       resultDiv.innerHTML = `<div class="alert alert-warning" role="alert">
       Sorry you lost. The winning numbers were ${rand1}, ${rand2}, ${rand3}, ${rand4}, ${rand5}, ${rand6}
       <br>
-      <a href="" >click here to start a new game </a>
+      <a href="" class="mt-2 btn btn-info" >start a new game </a>
       </div>`;
      return false;
     } 
