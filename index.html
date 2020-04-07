@@ -24,7 +24,7 @@
 
 
 
-  <form onsubmit="return checkLoto()" method="get" name="formLoto" class="card p-5 m-5">
+  <form  name="formLoto" class="card p-5 m-5">
       <h3 class="text-center text-info"> Fancy another loto party ?</h3>
       <p class="mt-5 text-info"> Enter your details</p>
       <div class="row ">
@@ -62,11 +62,19 @@
 
       <div class=" mt-5 form-group row text-center">
         <div class="col">
-          <button type="submit" class="btn btn-info">Check Result</button>
+          <button type="submit" id="submit" class="btn btn-info">Check Result</button>
         </div>
       </div>
       
     </form>
+
+    <script>
+      var submit = document.getElementById("submit");    
+      submit.addEventListener('click', function(event) {
+          event.preventDefault();
+           newGame();
+      });
+    </script>
   </div>
 
 </body>

@@ -1,5 +1,5 @@
 
-const checkLoto = () => {
+const newGame = () => {
 
   let resultDiv = document.querySelector(".result");
  
@@ -16,12 +16,27 @@ const checkLoto = () => {
 
   let number = [Number(number1), Number(number2), Number(number3), Number(number4), Number(number5), Number(number6)].sort();
 
+  if(! checkValidation(firstname, lastname, email, resultDiv)){
+    return false;
+    }
+  if(!checkCustomValidationEmail(email, resultDiv)){
+    return false;
+  }
+
+  checkLoto(number, resultDiv);
+
+
+};
+
+checkValidation = (firstname, lastname, email, resultDiv) => {
   if(firstname == "") {
     resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">
       Please add your firstName !
       </div>`;
+      console.log("je suis la");
     return false;
   }
+
   if(lastname == "") {
     resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">
     Please provide your Lastname !
@@ -35,16 +50,23 @@ const checkLoto = () => {
     </div>`;
     return false;
   }
+  return true
+}
 
- //Ma fonction de validation des mails renvoie une erreur dans un tableau. 
-  if (customEmailTest(email).length > 0){
+
+
+const checkCustomValidationEmail = (email, resultDiv) =>{
+
+   if (customEmailTest(email).length > 0){
     resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">
     ${customEmailTest(email)}
     </div>`;
+    console.log("je suis la aussi");
     return false;
   }
-  return checkGame(number, resultDiv);
+  return true;
 }
+
 
 
 const customEmailTest = (email) => {
@@ -70,7 +92,7 @@ const customEmailTest = (email) => {
 }
 
 
-const checkGame = (number, resultDiv) => {
+const checkLoto = (number, resultDiv) => {
   let rand1 = getRandomIntInclusive(1, 10);
   let rand2 = getRandomIntInclusive(1, 10);
   let rand3 = getRandomIntInclusive(1, 10);
