@@ -9,9 +9,6 @@ const checkLoto = () => {
   const lastname = document.formLoto.lastname.value;
   const email = document.formLoto.email.value;
 
-  let emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  let testEmail = emailRegExp.test(email);
-
   const number1 = document.formLoto.number1.value;
   const number2 = document.formLoto.number2.value;
   const number3 = document.formLoto.number3.value;
@@ -42,13 +39,40 @@ const checkLoto = () => {
   }
 
 
-  if (testEmail == false){
+  if (customEmailTest(email).length > 0){
     resultDiv.innerHTML = `<div class="alert alert-danger" role="alert">
-    Please provide a valid Mail !
+    ${customEmailTest(email)}
     </div>`;
     return false;
   }
   return checkGame(number, resultDiv);
+}
+
+
+const customEmailTest = (email) => {
+  let messages = [];
+  let extension = email.split('.').pop();
+  console.log(extension);
+  console.log(extension.length);
+
+  if (email.length < 8){
+    message = "Le mail fait moins de 8 caractère";
+    messages.push(message);
+  }
+  if (email.length>30){
+    message = "Le mail fait plus de 30 caractère";
+    messages.push(message);
+  }
+  if (!email.includes("@") || !email.includes(".")  ){
+    message = "Le mail ne contient pas de @ ou de. "
+    messages.push(message);
+  }
+  if (extension.length !== 2 && extension.length !== 3 ){
+    message = "L'extension ne fait pas 2 ou 3 caractere";
+    messages.push(message);
+  }
+
+  return messages;
 }
 
 
@@ -65,6 +89,8 @@ const checkGame = (number, resultDiv) => {
 		if (random[i] !== number[i]){ 
       resultDiv.innerHTML = `<div class="alert alert-warning" role="alert">
       Sorry you lost. The winning numbers were ${rand1}, ${rand2}, ${rand3}, ${rand4}, ${rand5}, ${rand6}
+      <br>
+      <a href="" >click here to start a new game </a>
       </div>`;
      return false;
     } 
